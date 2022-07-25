@@ -1,29 +1,34 @@
 import { GetStaticProps } from "next";
 import PokemonNameMenu from "../components/PokemonMenu";
 
-const Pokedex = ({ pokemonInfo }: any) => {
+// Types -------------------------------------------------------------------->
+interface PokedexEntry {
+  name: string
+  url: string
+}
+
+interface PokedexEntries {
+  pokedexEntries: Array<PokedexEntry>
+}
+
+// Component ---------------------------------------------------------------->
+const Pokedex = ({ pokedexEntries }: PokedexEntries) => {
   return (
     <>
-      <h1
-        className="
-          py-4 mb-10
-          bg-purple-400 
-          font-bold text-white
-          text-center antialised uppercase ">
-        available pokemons
-      </h1>
-      <PokemonNameMenu pokemonInfo={pokemonInfo} />
+      <PokemonNameMenu pokedexEntries={pokedexEntries} />
     </>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
-  const pokemonInfo = await res.json()
+  const res = await fetch(
+    'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
+  )
+  const pokedexEntries = await res.json()
   return {
     props: {
-      pokemonInfo: pokemonInfo.results
-    }
+      pokedexEntries: pokedexEntries.results
+    } as PokedexEntries
   }
 }
 export default Pokedex

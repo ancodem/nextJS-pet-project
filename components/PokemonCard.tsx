@@ -1,5 +1,6 @@
+
 const PokemonCard = ({ pokemon }: any) => {
-  const handleClick = (url: any) => {
+  const handleClick = (url: string) => {
     alert(url)
   }
 
