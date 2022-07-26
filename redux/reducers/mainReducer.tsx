@@ -1,21 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { FullPokemonList } from "./types";
+import { createSlice } from '@reduxjs/toolkit'
+import { PokemonData } from './types'
 
-const initialState: FullPokemonList = [
-  { name: '', url: '' },
-]
+const initialState: PokemonData = {
+  fullPokemonList: [{ name: null, url: null }],
+  selectedPokemon: { name: null, url: null },
+  selectedPokemonFullData: {},
+}
 
-const mainReducer = createSlice({
+const mainSlice = createSlice({
   name: 'mainReducer',
-  initialState: initialState,
+  initialState,
   reducers: {
-    getFullPokemonList(state, action) {
-      return {
-        ...state,
-        ...action.payload,
-      }
+    setFullPokemonList: (state, action) => {
+      state.fullPokemonList = action.payload
+    },
+    setSelectedPokemon: (state, action) => {
+      state.selectedPokemon = { ...action.payload }
     }
   }
 })
 
-export default mainReducer
+export const { setFullPokemonList, setSelectedPokemon } = mainSlice.actions
+
+export default mainSlice.reducer

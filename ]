@@ -2,16 +2,16 @@ import { PokedexEntry } from "types"
 import { setSelectedPokemon } from "redux/reducers/mainReducer";
 import { SinglePokemonInfo } from "redux/reducers/types";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import Link from "next/link";
 
 const PokemonCard: React.FC<PokedexEntry> = ({ name, url }) => {
   const dispatch = useAppDispatch()
   const selectedPokemon = useAppSelector(
-    state => state.main.selectedPokemon
-  )
+    state => state.main.selectedPokemon)
 
   const handleClick = (pokemon: SinglePokemonInfo) => {
     dispatch(setSelectedPokemon(pokemon))
+    alert(pokemon)
+    alert(selectedPokemon)
   }
 
   return (

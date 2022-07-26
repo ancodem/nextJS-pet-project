@@ -1,16 +1,15 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import {
-  createStore,
-  combineReducers,
-  applyMiddleware,
-  compose,
-  AnyAction,
-} from 'redux'
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk"
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import mainSlice from 'redux/reducers/mainReducer'
+import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers(null)
-export const store = createStore(
-  rootReducer,
-  composeEnhencers(applyMiddleware(thunk))
-)
+const rootReducer = combineReducers({
+  main: mainSlice,
+})
 
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: [thunk],
+})
+
+export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch
