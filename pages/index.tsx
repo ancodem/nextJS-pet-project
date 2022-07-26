@@ -1,25 +1,11 @@
 import { GetStaticProps } from "next";
 import PokemonNameMenu from "../components/PokemonMenu";
 import { PokedexEntries } from 'types';
-import { setFullPokemonList } from "redux/reducers/mainReducer";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import { useEffect } from "react";
-
 
 const Pokedex: React.FC<PokedexEntries> = ({ pokedexEntries }) => {
-  const dispatch = useAppDispatch()
-
-  const fullPokemonList = useAppSelector(
-    state => state.main.fullPokemonList
-  )
-
-  useEffect(() => {
-    dispatch(setFullPokemonList(pokedexEntries))
-  }, [pokedexEntries])
-
   return (
     <>
-      <PokemonNameMenu pokedexEntries={fullPokemonList} />
+      <PokemonNameMenu pokedexEntries={pokedexEntries} />
     </>
   )
 }
