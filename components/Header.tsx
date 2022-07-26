@@ -1,4 +1,4 @@
-const Header = () => (
+const Header: React.FC = () => (
   <h1
     className="
       py-4 mb-10

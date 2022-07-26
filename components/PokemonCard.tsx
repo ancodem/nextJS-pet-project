@@ -1,18 +1,19 @@
+import { PokedexEntry } from "types"
 
-const PokemonCard = ({ pokemon }: any) => {
+const PokemonCard: React.FC<PokedexEntry> = ({ name, url }) => {
   const handleClick = (url: string) => {
     alert(url)
   }
 
   return (
     <div
-      onClick={() => handleClick(pokemon.url)}
+      onClick={() => handleClick(url)}
       className="
-            my-4 py-5 
+            my-2 py-5 
             bg-purple-600 rounded aspect-square-md 
             text-sm text-white text-center uppercase
             hover:bg-purple-900">
-      {pokemon.name}
+      {name}
     </div>
   )
 }

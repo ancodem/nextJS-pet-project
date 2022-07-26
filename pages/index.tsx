@@ -1,18 +1,8 @@
 import { GetStaticProps } from "next";
 import PokemonNameMenu from "../components/PokemonMenu";
+import { PokedexEntries } from 'types'
 
-// Types -------------------------------------------------------------------->
-interface PokedexEntry {
-  name: string
-  url: string
-}
-
-interface PokedexEntries {
-  pokedexEntries: Array<PokedexEntry>
-}
-
-// Component ---------------------------------------------------------------->
-const Pokedex = ({ pokedexEntries }: PokedexEntries) => {
+const Pokedex: React.FC<PokedexEntries> = ({ pokedexEntries }) => {
   return (
     <>
       <PokemonNameMenu pokedexEntries={pokedexEntries} />
