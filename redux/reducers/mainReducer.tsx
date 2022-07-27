@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { PokemonData } from './types'
 
 const initialState: PokemonData = {
-  fullPokemonList: [{ name: null, url: null }],
-  selectedPokemon: { name: null, url: null },
+  fullPokemonList: [{ name: '', url: '' }],
+  selectedPokemon: { name: '', url: '' },
   selectedPokemonFullData: {},
 }
 
