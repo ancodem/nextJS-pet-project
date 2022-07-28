@@ -1,5 +1,7 @@
 {
   "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": { 
     "no-restricted-imports": "off",
     "@typescript-eslint/no-restricted-imports": [
@@ -9,7 +11,6 @@
         "importNames": ["useSelector", "useDispatch"],
         "message": "Use typed hooks `useAppDispatch` and `useAppSelector` instead."
       }
-    ],
+    ]
   }
-
 }
