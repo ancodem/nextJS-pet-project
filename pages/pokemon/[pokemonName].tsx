@@ -1,24 +1,26 @@
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next"
+import Head from "next/head"
+
 interface Abilities {
   ability: { name: string, url: string }
   isHidden: boolean
   slot: number
 }
 
-interface PokemonProps {
-  abilities: Array<Abilities>
-  pokemonName: string
-}
-
-const Pokemon: React.FC<PokemonProps> = ({ abilities, pokemonName }) => {
+const Pokemon: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ abilities, pokemonName }) => {
   return (
     <>
+      <Head>
+        <title>
+          {pokemonName}
+        </title>
+      </Head>
       <h2 className="
-        uppercase p-2 mx-auto rounded-t w-1/6 text-center  bg-purple-400
-        ">{pokemonName}
+        uppercase p-2 mx-auto rounded-t w-1/6 text-center  bg-purple-400">
+        {pokemonName}
       </h2>
-      <ul
-        className="flex bg-purple-300 p-5 rounded flex-col my-4 w-3/6 mx-auto"
-      >
+      <ul className="
+        flex bg-purple-300 p-5 rounded flex-col my-4 w-3/6 mx-auto">
         <p className="uppercase border-b text-center">Abilities</p>
         {abilities.map(
           (ab: Abilities) =>
@@ -33,7 +35,7 @@ const Pokemon: React.FC<PokemonProps> = ({ abilities, pokemonName }) => {
   )
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(
     'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
   )
@@ -46,11 +48,14 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false }
 }
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context: any) => {
   const pokemonName = context.params.pokemonName
 
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
   const pokemonInfo = await res.json()
+
+  if (!pokemonInfo) return { props: { notFound: true, } }
+
   type Response = typeof pokemonInfo
 
   return {

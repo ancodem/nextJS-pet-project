@@ -1,10 +1,14 @@
 import { GetStaticProps } from "next";
 import PokemonNameMenu from "../components/PokemonMenu";
 import { PokedexEntries } from 'types';
+import Head from "next/head";
 
 const Pokedex: React.FC<PokedexEntries> = ({ pokedexEntries }) => {
   return (
     <>
+      <Head>
+        <title>Pokedex</title>
+      </Head>
       <PokemonNameMenu pokedexEntries={pokedexEntries} />
     </>
   )
